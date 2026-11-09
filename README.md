@@ -33,7 +33,7 @@ Run the command in a terminal. The game is interactive and requires keyboard inp
 
 The project includes a regression suite using Python's built-in `unittest` framework. It covers health and damage boundaries, character abilities, defense damage, enemy scaling, boss generation, and input validation.
 
-Run the tests from the project root:
+Run the tests from the project root. GitHub Actions also runs the suite on pushes and pull requests for Python 3.8, 3.11, and 3.12:
 
 ```bash
 python -m unittest discover -s tests -v
