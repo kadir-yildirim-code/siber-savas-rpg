@@ -29,6 +29,20 @@ python siber_savas.py
 
 Run the command in a terminal. The game is interactive and requires keyboard input.
 
+## Tests
+
+The project includes a small regression suite using Python's built-in `unittest` framework. It covers health and damage boundaries, character abilities, defense damage, enemy scaling, and boss generation.
+
+Run the tests from the project root:
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+## Maintenance note
+
+This began as a student project and has been revisited as a portfolio exercise. The first maintenance step adds tests around the existing game rules; the original gameplay and scope are intentionally preserved.
+
 ## Controls
 
 During combat:
