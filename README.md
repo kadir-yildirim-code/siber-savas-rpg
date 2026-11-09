@@ -14,7 +14,7 @@ A terminal-based, turn-based RPG written in Python. Choose a cyber warrior, figh
 
 ## Object-oriented programming concepts
 
-The project uses an inheritance hierarchy beginning with `DijitalVarlik`. `SiberSavasci`, `KodAvcisi`, `AgFedaisi`, and `Virus` model the player and enemy entities. Character-specific `ozel_guc()` implementations demonstrate method overriding and polymorphic behavior. The game also uses constructors, `super()`, instance attributes, and methods.
+The project uses an inheritance hierarchy beginning with `DijitalVarlik`. `SiberSavasci`, `KodAvcisi`, `AgFedaisi`, and `Virus` model the player and enemy entities. Character-specific `ozel_guc()` implementations demonstrate method overriding and polymorphic behavior. The game also uses constructors, `super()`, instance attributes, methods, and type hints on core classes and functions.
 
 ## Requirements
 
@@ -41,7 +41,7 @@ python -m unittest discover -s tests -v
 
 ## Maintenance note
 
-This began as a student project and has been revisited as a portfolio exercise. The first maintenance step adds tests around the existing game rules; the original gameplay and scope are intentionally preserved.
+This began as a student project and is being maintained incrementally as a portfolio exercise. Recent changes add regression tests, type hints, and input validation while intentionally preserving the original gameplay and scope.
 
 ## Controls
 
@@ -53,7 +53,7 @@ During combat:
 
 Invalid menu entries are rejected and the prompt is repeated; an invalid combat command no longer gives the enemy a free turn.
 
-At the end of a level, enter `e` to continue to the next sector. Any other response exits the game.
+At the end of a level, enter `e` to continue or `h` to exit. Other inputs are rejected and the prompt is repeated.
 
 ## Project structure
 
@@ -61,7 +61,12 @@ At the end of a level, enter `e` to continue to the next sector. Any other respo
 siber-savas-rpg/
 ├── README.md
 ├── .gitignore
-└── siber_savas.py
+├── siber_savas.py
+├── tests/
+│   └── test_game_logic.py
+└── .github/
+    └── workflows/
+        └── python-tests.yml
 ```
 
 ## Project context
