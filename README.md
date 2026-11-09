@@ -31,7 +31,7 @@ Run the command in a terminal. The game is interactive and requires keyboard inp
 
 ## Tests
 
-The project includes a small regression suite using Python's built-in `unittest` framework. It covers health and damage boundaries, character abilities, defense damage, enemy scaling, and boss generation.
+The project includes a regression suite using Python's built-in `unittest` framework. It covers health and damage boundaries, character abilities, defense damage, enemy scaling, boss generation, and input validation.
 
 Run the tests from the project root:
 
@@ -50,6 +50,8 @@ During combat:
 - `1` — Attack
 - `2` — Defend
 - `3` — Use special ability
+
+Invalid menu entries are rejected and the prompt is repeated; an invalid combat command no longer gives the enemy a free turn.
 
 At the end of a level, enter `e` to continue to the next sector. Any other response exits the game.
 
