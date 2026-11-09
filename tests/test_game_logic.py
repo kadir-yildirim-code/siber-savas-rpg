@@ -145,9 +145,7 @@ class InputValidationTests(unittest.TestCase):
         player = KodAvcisi("Kadir")
         enemy = Virus("Test Virus", guc=20, can=20)
 
-        with patch("builtins.input", side_effect=["invalid", "1"]), \\
-             patch("siber_savas.time.sleep"), \\
-             redirect_stdout(StringIO()):
+        with patch("builtins.input", side_effect=["invalid", "1"]), patch("siber_savas.time.sleep"), redirect_stdout(StringIO()):
             result = savas_dongusu(player, enemy)
 
         self.assertTrue(result)
