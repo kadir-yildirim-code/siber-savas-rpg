@@ -13,7 +13,11 @@ from siber_savas import (
     DijitalVarlik,
     KodAvcisi,
     Virus,
+    karakter_olustur,
+    menu_secimi_al,
     rastgele_dusman_uret,
+    savas_dongusu,
+    zorunlu_metin_al,
 )
 
 
@@ -112,6 +116,43 @@ class EnemyGenerationTests(unittest.TestCase):
         self.assertIn("BOSS", boss.ad)
         self.assertEqual(boss.guc, 70)
         self.assertEqual(boss.can, 300)
+
+
+class InputValidationTests(unittest.TestCase):
+    def test_empty_player_name_is_rejected_until_non_empty_value_is_entered(self):
+        with patch("builtins.input", side_effect=["   ", "Kadir"]):
+            with redirect_stdout(StringIO()):
+                player_name = zorunlu_metin_al("Player name: ")
+
+        self.assertEqual(player_name, "Kadir")
+
+    def test_menu_choice_is_normalized_and_invalid_values_are_rejected(self):
+        with patch("builtins.input", side_effect=["invalid", " E "]):
+            with redirect_stdout(StringIO()):
+                choice = menu_secimi_al(("e", "h"), "Continue? ")
+
+        self.assertEqual(choice, "e")
+
+    def test_character_creation_retries_invalid_class_selection(self):
+        with patch("builtins.input", side_effect=["Kadir", "0", "2"]):
+            with redirect_stdout(StringIO()):
+                player = karakter_olustur()
+
+        self.assertIsInstance(player, AgFedaisi)
+        self.assertEqual(player.ad, "Kadir")
+
+    def test_invalid_battle_command_does_not_give_enemy_a_free_turn(self):
+        player = KodAvcisi("Kadir")
+        enemy = Virus("Test Virus", guc=20, can=20)
+
+        with patch("builtins.input", side_effect=["invalid", "1"]), \\
+             patch("siber_savas.time.sleep"), \\
+             redirect_stdout(StringIO()):
+            result = savas_dongusu(player, enemy)
+
+        self.assertTrue(result)
+        self.assertEqual(player.can, player.max_can)
+        self.assertFalse(enemy.canli_mi())
 
 
 if __name__ == "__main__":
